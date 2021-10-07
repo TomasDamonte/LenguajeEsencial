@@ -179,7 +179,7 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // BUCLE ::= MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA END PUNTOYCOMA 
+          case 4: // BUCLE ::= MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA 
             {
               Object RESULT =null;
 

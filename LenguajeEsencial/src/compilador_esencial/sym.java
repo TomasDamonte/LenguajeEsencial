@@ -11,6 +11,7 @@ public class sym {
   public static final int INCR = 8;
   public static final int DISTINTOCERO = 3;
   public static final int DECR = 7;
+  public static final int FIN = 5;
   public static final int EOF = 0;
   public static final int NUMERO = 11;
   public static final int ID = 10;
@@ -19,14 +20,13 @@ public class sym {
   public static final int MIENTRAS = 2;
   public static final int HACER = 4;
   public static final int PUNTOYCOMA = 6;
-  public static final int END = 5;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "MIENTRAS",
   "DISTINTOCERO",
   "HACER",
-  "END",
+  "FIN",
   "PUNTOYCOMA",
   "DECR",
   "INCR",

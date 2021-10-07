@@ -970,7 +970,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 17: break;
           case 7:
-            { return new Symbol(sym.END);
+            { return new Symbol(sym.FIN);
             }
             // fall through
           case 18: break;

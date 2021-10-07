@@ -28,7 +28,7 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 "while" { return new Symbol(sym.MIENTRAS); }
 "<> 0" { return new Symbol(sym.DISTINTOCERO); }
 "do" { return new Symbol(sym.HACER); }
-"end" { return new Symbol(sym.END); }
+"end" { return new Symbol(sym.FIN); }
 "incr" { return new Symbol(sym.INCR); }
 "decr" { return new Symbol(sym.DECR); }
 "=" { return new Symbol(sym.IGUAL); }
