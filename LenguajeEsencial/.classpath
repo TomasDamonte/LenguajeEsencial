@@ -6,7 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/java-cup-11.jar"/>
 	<classpathentry kind="lib" path="lib/jflex-full-1.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/java-cup-11b-runtime.jar"/>
 	<classpathentry kind="lib" path="lib/java-cup-11b.jar"/>

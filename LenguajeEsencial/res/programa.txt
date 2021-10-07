@@ -1,0 +1,5 @@
+var1 = 89;
+decr var2;
+while var4 <> 0 do;
+incr var6;
+end;
