@@ -1,21 +1,72 @@
 package compilador_esencial;
 
 import java_cup.runtime.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
+
+action code{:
+
+	HashMap<String, Integer> variables = new HashMap<String, Integer>();
+   	
+   	public void Asignar(String id, Integer valor)
+   	{
+   		if(id == null || id.trim().equals("") || valor == null) return;
+   		if(variables.containsKey(id)) variables.remove(id);   		
+   		variables.put(id,valor);   		
+   	}
+   	
+   	public void ImprimirValores()
+   	{
+   		Iterator<String> it = variables.keySet().iterator();
+		while(it.hasNext())
+		{
+			String key = it.next();
+			System.out.println(key + " = " + variables.get(key));
+		}
+   	}  	
+   	
+:}
 
 
 /* Terminales sin atributo */
-terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL, ID, NUMERO;
-
+terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL;
+terminal String ID;
+terminal Integer NUMERO;
 
 /* Terminales con atributo asociado */
 
 /* No terminales sin atributo */
-non terminal PROGRAMA, BUCLE, SENTENCIA, PARTESENTENCIA, LISTASENTENCIAS;
+non terminal PROGRAMA, BUCLE, SENTENCIA, PARTESENTENCIA, LISTASENTENCIAS, S;
+
+/* Axioma */
+start with S;
 
 /* Gramatica */
-PROGRAMA ::= PARTESENTENCIA PROGRAMA | BUCLE PROGRAMA | /* Lambda */;
-BUCLE ::= MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA;
-LISTASENTENCIAS ::= LISTASENTENCIAS PARTESENTENCIA | PARTESENTENCIA;
-PARTESENTENCIA ::= SENTENCIA PUNTOYCOMA;
-SENTENCIA ::= INCR ID | DECR ID | ID IGUAL NUMERO;
+
+S ::= PROGRAMA{:ImprimirValores();:};
+
+PROGRAMA ::= 
+	PARTESENTENCIA PROGRAMA	
+	| BUCLE PROGRAMA 	
+	| /* Lambda */;
+
+BUCLE ::= 
+	MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA;
+
+LISTASENTENCIAS ::= 
+	LISTASENTENCIAS PARTESENTENCIA 
+	| PARTESENTENCIA;
+
+PARTESENTENCIA ::= 
+	SENTENCIA PUNTOYCOMA;
+
+SENTENCIA ::= 
+			INCR ID 
+			
+			| DECR ID 
+			
+			| ID:id IGUAL NUMERO:n
+			{: Asignar(id,n); :}
+			;
 
