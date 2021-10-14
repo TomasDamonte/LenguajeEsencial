@@ -7,22 +7,36 @@ import java.util.Iterator;
 
 action code{:
 
-	HashMap<String, Integer> variables = new HashMap<String, Integer>();
+	HashMap<String, Integer> Variables = new HashMap<String, Integer>();
    	
    	public void Asignar(String id, Integer valor)
    	{
-   		if(id == null || id.trim().equals("") || valor == null) return;
-   		if(variables.containsKey(id)) variables.remove(id);   		
-   		variables.put(id,valor);   		
+   		if(id == null || valor == null) return;
+   		if(Variables.containsKey(id)) Variables.remove(id);   		
+   		Variables.put(id,valor);   		
+   	}   	
+   	
+   	public void Decrementar(String id)
+   	{
+   		if(id == null) return;
+   		Variables.putIfAbsent(id, 0);   		
+   		Asignar(id, Variables.get(id) - 1);
    	}
    	
-   	public void ImprimirValores()
+   	public void Incrementar(String id)
    	{
-   		Iterator<String> it = variables.keySet().iterator();
+   		if(id == null) return;
+   		Variables.putIfAbsent(id, 0);   		
+   		Asignar(id, Variables.get(id) + 1);
+   	}
+   	
+   	public void ImprimirVariables()
+   	{
+   		Iterator<String> it = Variables.keySet().iterator();
 		while(it.hasNext())
 		{
 			String key = it.next();
-			System.out.println(key + " = " + variables.get(key));
+			System.out.println(key + " = " + Variables.get(key));
 		}
    	}  	
    	
@@ -31,42 +45,38 @@ action code{:
 
 /* Terminales sin atributo */
 terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL;
-terminal String ID;
-terminal Integer NUMERO;
 
 /* Terminales con atributo asociado */
+terminal Integer NUMERO;
+terminal String ID;
 
 /* No terminales sin atributo */
-non terminal PROGRAMA, BUCLE, SENTENCIA, PARTESENTENCIA, LISTASENTENCIAS, S;
+non terminal PROGRAMA, BUCLE , SENTENCIA ,S;
+
+/* No terminales con atributo asociado */
 
 /* Axioma */
 start with S;
 
 /* Gramatica */
 
-S ::= PROGRAMA{:ImprimirValores();:};
+S ::= PROGRAMA {: ImprimirVariables(); :};
 
 PROGRAMA ::= 
-	PARTESENTENCIA PROGRAMA	
+	SENTENCIA PROGRAMA	
 	| BUCLE PROGRAMA 	
 	| /* Lambda */;
 
 BUCLE ::= 
 	MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA;
 
-LISTASENTENCIAS ::= 
-	LISTASENTENCIAS PARTESENTENCIA 
-	| PARTESENTENCIA;
-
-PARTESENTENCIA ::= 
-	SENTENCIA PUNTOYCOMA;
-
 SENTENCIA ::= 
-			INCR ID 
-			
-			| DECR ID 
-			
-			| ID:id IGUAL NUMERO:n
-			{: Asignar(id,n); :}
+			ID:i IGUAL NUMERO:n PUNTOYCOMA
+			{: Asignar(i, n); :}
+			| INCR ID:i PUNTOYCOMA
+			{: Incrementar(i); :}
+			| DECR ID:i PUNTOYCOMA
+			{: Decrementar(i); :}			
+			| ID:i1 IGUAL ID:i2 PUNTOYCOMA
+			{: Asignar(i1, Variables.get(i2)); :}		
 			;
-

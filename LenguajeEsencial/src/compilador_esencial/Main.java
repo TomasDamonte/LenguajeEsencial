@@ -20,13 +20,10 @@ public class Main
 			Asignar("a",89);
 			Asignar("b",9);
 			Asignar(" ",4);
-			
-			Iterator<String> it = variables.keySet().iterator();
-			while(it.hasNext())
-			{
-				String key = it.next();
-				System.out.println(key + " = " + variables.get(key));
-			}
+			Incrementar("a");
+			Decrementar("b");
+			Incrementar("c");
+			ImprimirVariables();
 			*/
 		}		
 		catch (Exception e) 
@@ -35,10 +32,34 @@ public class Main
 		}
 	}
 	
+	public static void Decrementar(String id)
+   	{
+   		if(id == null) return;
+   		variables.putIfAbsent(id, 0);   		
+   		Asignar(id, variables.get(id) - 1);
+   	}
+   	
+   	public static void Incrementar(String id)
+   	{
+   		if(id == null) return;
+   		variables.putIfAbsent(id, 0);
+   		Asignar(id, variables.get(id) + 1);
+   	}
+	
 	public static void Asignar(String id, Integer valor)
    	{
 		if(id == null || id.trim().equals("")) return;
    		if(variables.containsKey(id)) variables.remove(id);   		
    		variables.put(id,valor);   		
+   	}
+	
+	public static void ImprimirVariables()
+   	{
+   		Iterator<String> it = variables.keySet().iterator();
+		while(it.hasNext())
+		{
+			String key = it.next();
+			System.out.println(key + " = " + variables.get(key));
+		}
    	}
 }
