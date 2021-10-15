@@ -6,9 +6,6 @@
 package compilador_esencial;
 
 import java_cup.runtime.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java_cup.runtime.XMLElement;
 
@@ -35,10 +32,9 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\012\000\002\002\004\000\002\004\003\000\002\002" +
-    "\004\000\002\002\004\000\002\002\002\000\002\003\012" +
-    "\000\002\005\006\000\002\005\005\000\002\005\005\000" +
-    "\002\005\006" });
+    "\000\011\000\002\002\004\000\002\002\003\000\002\003" +
+    "\004\000\002\003\002\000\002\004\006\000\002\004\006" +
+    "\000\002\004\005\000\002\004\005\000\002\004\012" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -46,27 +42,25 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\034\000\014\002\ufffd\004\013\011\005\012\010\015" +
-    "\004\001\002\000\004\013\032\001\002\000\004\015\030" +
-    "\001\002\000\016\002\ufffd\004\013\007\ufffd\011\005\012" +
-    "\010\015\004\001\002\000\004\002\026\001\002\000\004" +
-    "\015\024\001\002\000\016\002\ufffd\004\013\007\ufffd\011" +
-    "\005\012\010\015\004\001\002\000\004\002\000\001\002" +
-    "\000\004\015\014\001\002\000\004\005\015\001\002\000" +
-    "\004\006\016\001\002\000\004\010\017\001\002\000\014" +
-    "\004\013\007\ufffd\011\005\012\010\015\004\001\002\000" +
-    "\004\007\021\001\002\000\004\010\022\001\002\000\016" +
-    "\002\ufffc\004\ufffc\007\ufffc\011\ufffc\012\ufffc\015\ufffc\001" +
-    "\002\000\006\002\ufffe\007\ufffe\001\002\000\004\010\025" +
-    "\001\002\000\016\002\ufffa\004\ufffa\007\ufffa\011\ufffa\012" +
-    "\ufffa\015\ufffa\001\002\000\004\002\001\001\002\000\006" +
-    "\002\uffff\007\uffff\001\002\000\004\010\031\001\002\000" +
-    "\016\002\ufff9\004\ufff9\007\ufff9\011\ufff9\012\ufff9\015\ufff9" +
-    "\001\002\000\006\014\033\015\034\001\002\000\004\010" +
-    "\036\001\002\000\004\010\035\001\002\000\016\002\ufff8" +
-    "\004\ufff8\007\ufff8\011\ufff8\012\ufff8\015\ufff8\001\002\000" +
-    "\016\002\ufffb\004\ufffb\007\ufffb\011\ufffb\012\ufffb\015\ufffb" +
-    "\001\002" });
+    "\000\031\000\014\002\ufffe\004\ufffe\011\ufffe\012\ufffe\015" +
+    "\ufffe\001\002\000\004\002\033\001\002\000\014\002\000" +
+    "\004\012\011\006\012\011\015\007\001\002\000\004\015" +
+    "\031\001\002\000\004\013\024\001\002\000\016\002\uffff" +
+    "\004\uffff\007\uffff\011\uffff\012\uffff\015\uffff\001\002\000" +
+    "\004\015\022\001\002\000\004\015\013\001\002\000\004" +
+    "\005\014\001\002\000\004\006\015\001\002\000\004\010" +
+    "\016\001\002\000\014\004\ufffe\007\ufffe\011\ufffe\012\ufffe" +
+    "\015\ufffe\001\002\000\014\004\012\007\020\011\006\012" +
+    "\011\015\007\001\002\000\004\010\021\001\002\000\016" +
+    "\002\ufff9\004\ufff9\007\ufff9\011\ufff9\012\ufff9\015\ufff9\001" +
+    "\002\000\004\010\023\001\002\000\016\002\ufffb\004\ufffb" +
+    "\007\ufffb\011\ufffb\012\ufffb\015\ufffb\001\002\000\006\014" +
+    "\026\015\025\001\002\000\004\010\030\001\002\000\004" +
+    "\010\027\001\002\000\016\002\ufffd\004\ufffd\007\ufffd\011" +
+    "\ufffd\012\ufffd\015\ufffd\001\002\000\016\002\ufffc\004\ufffc" +
+    "\007\ufffc\011\ufffc\012\ufffc\015\ufffc\001\002\000\004\010" +
+    "\032\001\002\000\016\002\ufffa\004\ufffa\007\ufffa\011\ufffa" +
+    "\012\ufffa\015\ufffa\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -74,17 +68,15 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\034\000\012\002\011\003\010\004\006\005\005\001" +
-    "\001\000\002\001\001\000\002\001\001\000\010\002\026" +
-    "\003\010\005\005\001\001\000\002\001\001\000\002\001" +
-    "\001\000\010\002\022\003\010\005\005\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\010\002\017\003\010\005\005" +
+    "\000\031\000\006\002\003\003\004\001\001\000\002\001" +
+    "\001\000\004\004\007\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\000\004\003\016\001\001\000\004\004\007\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001" });
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -125,48 +117,6 @@ public class Parser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$Parser$actions {
-
-
-
-	HashMap<String, Integer> Variables = new HashMap<String, Integer>();
-	
-	ArrayList<Variable> Vars = new ArrayList<Variable>();
-   	
-   	public void Asignar(String id, Integer valor)
-   	{
-   		if(id == null || valor == null) return;
-   		if(Variables.containsKey(id)) Variables.remove(id);   		
-   		Variables.put(id,valor);   		
-   	}   	
-   	
-   	public void Decrementar(String id)
-   	{
-   		if(id == null) return;
-   		Variables.putIfAbsent(id, 0);
-   		if(Variables.get(id) == 0) return;  		
-   		Asignar(id, Variables.get(id) - 1);
-   	}
-   	
-   	public void Incrementar(String id)
-   	{
-   		if(id == null) return;
-   		Variables.putIfAbsent(id, 0);   		
-   		Asignar(id, Variables.get(id) + 1);
-   	}
-   	
-   	public void ImprimirVariables()
-   	{
-   	
-   		Iterator<String> it = Variables.keySet().iterator();
-		while(it.hasNext())
-		{
-			String key = it.next();
-			System.out.println(key + " = " + Variables.get(key));
-		}
-		
-   	}  	
-   	
-
   private final Parser parser;
 
   /** Constructor */
@@ -206,100 +156,123 @@ class CUP$Parser$actions {
           case 1: // S ::= PROGRAMA 
             {
               Object RESULT =null;
-		 ImprimirVariables(); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("S",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		ArrayList<Instruccion> p = (ArrayList<Instruccion>)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 
+		for(Instruccion i : p) {
+			i.Ejecutar();	
+		}
+		ListaVariables.ImprimirVariables(); 
+	
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // PROGRAMA ::= SENTENCIA PROGRAMA 
+          case 2: // PROGRAMA ::= PROGRAMA SENTENCIA 
             {
-              Object RESULT =null;
-
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              ArrayList<Instruccion> RESULT =null;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		ArrayList<Instruccion> p = (ArrayList<Instruccion>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		Instruccion s = (Instruccion)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		
+		if(p != null) RESULT = p;
+		else RESULT = new ArrayList<Instruccion>();
+		RESULT.add(s);
+	
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // PROGRAMA ::= BUCLE PROGRAMA 
+          case 3: // PROGRAMA ::= 
             {
-              Object RESULT =null;
+              ArrayList<Instruccion> RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // PROGRAMA ::= 
+          case 4: // SENTENCIA ::= ID IGUAL NUMERO PUNTOYCOMA 
             {
-              Object RESULT =null;
-
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("PROGRAMA",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
-          return CUP$Parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // BUCLE ::= MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA 
-            {
-              Object RESULT =null;
-
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("BUCLE",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
-          return CUP$Parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // SENTENCIA ::= ID IGUAL NUMERO PUNTOYCOMA 
-            {
-              Object RESULT =null;
+              Instruccion RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
 		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Integer n = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 	
-			Asignar(i, n);			
-			
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+							
+					RESULT = new Asignacion(i,n);
+				
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // SENTENCIA ::= INCR ID PUNTOYCOMA 
+          case 5: // SENTENCIA ::= ID IGUAL ID PUNTOYCOMA 
             {
-              Object RESULT =null;
-		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 Incrementar(i); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
-          return CUP$Parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // SENTENCIA ::= DECR ID PUNTOYCOMA 
-            {
-              Object RESULT =null;
-		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 Decrementar(i); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
-            }
-          return CUP$Parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // SENTENCIA ::= ID IGUAL ID PUNTOYCOMA 
-            {
-              Object RESULT =null;
+              Instruccion RESULT =null;
 		int i1left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int i1right = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String i1 = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
 		int i2left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int i2right = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		String i2 = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 Asignar(i1, Variables.get(i2)); 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+							
+					RESULT = new Asignacion(i1, i2);
+				
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // SENTENCIA ::= INCR ID PUNTOYCOMA 
+            {
+              Instruccion RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+						 	
+				 	RESULT = new Incremento(i);
+				
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // SENTENCIA ::= DECR ID PUNTOYCOMA 
+            {
+              Instruccion RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+							
+				 	RESULT = new Decremento(i);
+				
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+            }
+          return CUP$Parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 8: // SENTENCIA ::= MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA 
+            {
+              Instruccion RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
+		String i = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
+		int pleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		ArrayList<Instruccion> p = (ArrayList<Instruccion>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+							
+					RESULT = new Mientras(i, p);		
+				
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("SENTENCIA",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 

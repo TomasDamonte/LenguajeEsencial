@@ -1,49 +1,7 @@
 package compilador_esencial;
 
 import java_cup.runtime.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
 import java.util.ArrayList;
-
-action code{:
-
-	HashMap<String, Integer> Variables = new HashMap<String, Integer>();	
-   	
-   	public void Asignar(String id, Integer valor)
-   	{
-   		if(id == null || valor == null) return;
-   		if(Variables.containsKey(id)) Variables.remove(id);   		
-   		Variables.put(id,valor);   		
-   	}   	
-   	
-   	public void Decrementar(String id)
-   	{
-   		if(id == null) return;
-   		Variables.putIfAbsent(id, 0);
-   		if(Variables.get(id) == 0) return;  		
-   		Asignar(id, Variables.get(id) - 1);
-   	}
-   	
-   	public void Incrementar(String id)
-   	{
-   		if(id == null) return;
-   		Variables.putIfAbsent(id, 0);   		
-   		Asignar(id, Variables.get(id) + 1);
-   	}
-   	
-   	public void ImprimirVariables()
-   	{   	
-   		Iterator<String> it = Variables.keySet().iterator();
-		while(it.hasNext())
-		{
-			String key = it.next();
-			System.out.println(key + " = " + Variables.get(key));
-		}		
-   	}  	
-   	
-:}
-
 
 /* Terminales sin atributo */
 terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL;
@@ -53,40 +11,54 @@ terminal Integer NUMERO;
 terminal String ID;
 
 /* No terminales sin atributo */
-non terminal PROGRAMA, BUCLE, S, SENTENCIA;
+non terminal S;
 
 /* No terminales con atributo asociado */
+non terminal ArrayList<Instruccion> PROGRAMA;
+non terminal Instruccion SENTENCIA;
 
 /* Axioma */
 start with S;
 
 /* Gramatica */
 
-S ::= PROGRAMA {: ImprimirVariables(); :};
+S ::= PROGRAMA:p 
+	{: 
+		for(Instruccion i : p) {
+			i.Ejecutar();	
+		}
+		ListaVariables.ImprimirVariables(); 
+	:};
 
 PROGRAMA ::= 
-	SENTENCIA PROGRAMA	
-	| BUCLE PROGRAMA 	
+	PROGRAMA:p SENTENCIA:s
+	{:
+		if(p != null) RESULT = p;
+		else RESULT = new ArrayList<Instruccion>();
+		RESULT.add(s);
+	:}
 	| /* Lambda */;
-
-BUCLE ::= 
-	MIENTRAS ID DISTINTOCERO HACER PUNTOYCOMA PROGRAMA FIN PUNTOYCOMA;
 
 SENTENCIA ::= 
 			ID:i IGUAL NUMERO:n PUNTOYCOMA
-				{: 	
-					Asignar(i, n);			
+				{:					
+					RESULT = new Asignacion(i,n);
+				:}
+			| ID:i1 IGUAL ID:i2 PUNTOYCOMA
+				{:					
+					RESULT = new Asignacion(i1, i2);
 				:}
 			| INCR ID:i PUNTOYCOMA
-				{: 
-					Incrementar(i);
+				{:				 	
+				 	RESULT = new Incremento(i);
 				:}
 			| DECR ID:i PUNTOYCOMA
-				{: 
-					Decrementar(i);
+				{:					
+				 	RESULT = new Decremento(i);
 				:}			
-			| ID:i1 IGUAL ID:i2 PUNTOYCOMA
-				{: 
-					Asignar(i1, Variables.get(i2));
-				:}		
+			
+			| MIENTRAS ID:i DISTINTOCERO HACER PUNTOYCOMA PROGRAMA:p FIN PUNTOYCOMA
+				{:					
+					RESULT = new Mientras(i, p);		
+				:} 	
 			;

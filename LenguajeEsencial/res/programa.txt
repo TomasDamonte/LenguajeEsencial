@@ -1,4 +1,10 @@
+cont = 0;
 a = 2;
-c = a;
-incr a;
-decr b;
+while a <> 0 do;
+	b = 2;
+	while b <> 0 do;
+		incr cont;
+		decr b;
+	end;
+	decr a;
+end;
