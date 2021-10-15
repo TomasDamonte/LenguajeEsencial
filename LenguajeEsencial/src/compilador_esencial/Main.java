@@ -1,8 +1,10 @@
 package compilador_esencial;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Main 
 {	
@@ -14,7 +16,8 @@ public class Main
 	{
 		try 
 		{
-			new Parser(new Scanner(new FileReader("res/programa.txt"))).parse();
+			new Parser(new Scanner(new FileReader("res/programa.txt"))).parse();		
+			
 			
 			/*
 			Asignar("a",89);

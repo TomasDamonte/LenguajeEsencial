@@ -1,1 +1,4 @@
 a = 2;
+c = a;
+incr a;
+decr b;

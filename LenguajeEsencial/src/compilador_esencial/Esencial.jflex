@@ -33,6 +33,6 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 "decr" { return new Symbol(sym.DECR); }
 "=" { return new Symbol(sym.IGUAL); }
 ";" { return new Symbol(sym.PUNTOYCOMA); }
-{DecIntegerLiteral} { return new Symbol(sym.NUMERO); }
-{Identifier} { return new Symbol(sym.ID); }
+{DecIntegerLiteral} { return new Symbol(sym.NUMERO, new Integer(yytext())); }
+{Identifier} { return new Symbol(sym.ID, yytext()); }
 

@@ -945,12 +945,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 12: break;
           case 2:
-            { return new Symbol(sym.ID);
+            { return new Symbol(sym.ID, yytext() );
             }
             // fall through
           case 13: break;
           case 3:
-            { return new Symbol(sym.NUMERO);
+            { return new Symbol(sym.NUMERO, new Integer(yytext()));
             }
             // fall through
           case 14: break;

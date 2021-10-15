@@ -4,10 +4,11 @@ import java_cup.runtime.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 action code{:
 
-	HashMap<String, Integer> Variables = new HashMap<String, Integer>();
+	HashMap<String, Integer> Variables = new HashMap<String, Integer>();	
    	
    	public void Asignar(String id, Integer valor)
    	{
@@ -19,7 +20,8 @@ action code{:
    	public void Decrementar(String id)
    	{
    		if(id == null) return;
-   		Variables.putIfAbsent(id, 0);   		
+   		Variables.putIfAbsent(id, 0);
+   		if(Variables.get(id) == 0) return;  		
    		Asignar(id, Variables.get(id) - 1);
    	}
    	
@@ -31,13 +33,13 @@ action code{:
    	}
    	
    	public void ImprimirVariables()
-   	{
+   	{   	
    		Iterator<String> it = Variables.keySet().iterator();
 		while(it.hasNext())
 		{
 			String key = it.next();
 			System.out.println(key + " = " + Variables.get(key));
-		}
+		}		
    	}  	
    	
 :}
@@ -51,7 +53,7 @@ terminal Integer NUMERO;
 terminal String ID;
 
 /* No terminales sin atributo */
-non terminal PROGRAMA, BUCLE , SENTENCIA ,S;
+non terminal PROGRAMA, BUCLE, S, SENTENCIA;
 
 /* No terminales con atributo asociado */
 
@@ -72,11 +74,19 @@ BUCLE ::=
 
 SENTENCIA ::= 
 			ID:i IGUAL NUMERO:n PUNTOYCOMA
-			{: Asignar(i, n); :}
+				{: 	
+					Asignar(i, n);			
+				:}
 			| INCR ID:i PUNTOYCOMA
-			{: Incrementar(i); :}
+				{: 
+					Incrementar(i);
+				:}
 			| DECR ID:i PUNTOYCOMA
-			{: Decrementar(i); :}			
+				{: 
+					Decrementar(i);
+				:}			
 			| ID:i1 IGUAL ID:i2 PUNTOYCOMA
-			{: Asignar(i1, Variables.get(i2)); :}		
+				{: 
+					Asignar(i1, Variables.get(i2));
+				:}		
 			;
