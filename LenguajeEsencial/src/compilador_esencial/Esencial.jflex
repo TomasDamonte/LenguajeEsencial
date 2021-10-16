@@ -24,7 +24,8 @@ Identifier = [:jletter:] [:jletterdigit:]*
 DecIntegerLiteral = 0 | [1-9][0-9]*
 
 %%
-
+"," { return new Symbol(sym.COMA); }
+"print" { return new Symbol(sym.IMPRIMIR); }
 "while" { return new Symbol(sym.MIENTRAS); }
 "<> 0" { return new Symbol(sym.DISTINTOCERO); }
 "do" { return new Symbol(sym.HACER); }

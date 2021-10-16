@@ -32,9 +32,16 @@ public class ListaVariables {
 	}
 	
 	public static void ImprimirVariables() {
-		for(Variable v : Variables) {
-   			System.out.println(v.GetNombre() + " = " + v.GetValor());
-   		}
+		/*
+		if(Variables.size() > 0) {
+			System.out.println("Programa ejecutado correctamente.");
+			System.out.println("Valor final de las variables:");
+			for(Variable v : Variables) {
+	   			System.out.println(v.GetNombre() + " = " + v.GetValor());
+	   		}
+		}
+		*/
+		System.out.println("------ Fin de la ejecucion ------");
 	}
 
 }

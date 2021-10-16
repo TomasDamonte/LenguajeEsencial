@@ -13,11 +13,7 @@ public class Variable {
 	public Variable(String nombre) {
 		Nombre = nombre;
 	}
-	
-	public void SetNombre(String nombre) {
-		Nombre = nombre;
-	}
-	
+		
 	public void SetValor(int valor) {
 		Valor = valor;
 	}

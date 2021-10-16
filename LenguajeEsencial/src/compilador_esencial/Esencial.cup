@@ -2,16 +2,21 @@ package compilador_esencial;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+action code {:
+	ArrayList<String> VariablesImprimir = new ArrayList<String>();
+:}
 
 /* Terminales sin atributo */
-terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL;
+terminal MIENTRAS, DISTINTOCERO, HACER, FIN, PUNTOYCOMA, DECR, INCR, IGUAL, IMPRIMIR, COMA;
 
 /* Terminales con atributo asociado */
 terminal Integer NUMERO;
 terminal String ID;
 
 /* No terminales sin atributo */
-non terminal S;
+non terminal S, IDS;
 
 /* No terminales con atributo asociado */
 non terminal ArrayList<Instruccion> PROGRAMA;
@@ -22,43 +27,53 @@ start with S;
 
 /* Gramatica */
 
-S ::= PROGRAMA:p 
-	{: 
-		for(Instruccion i : p) {
-			i.Ejecutar();	
-		}
+S ::= 
+	PROGRAMA:p {: 
+		if(p != null) {
+			for(Instruccion i : p) {
+				i.Ejecutar();	
+			}
+		}		
 		ListaVariables.ImprimirVariables(); 
-	:};
+	:}
+;
 
 PROGRAMA ::= 
-	PROGRAMA:p SENTENCIA:s
-	{:
+	PROGRAMA:p SENTENCIA:s {:
 		if(p != null) RESULT = p;
 		else RESULT = new ArrayList<Instruccion>();
 		RESULT.add(s);
 	:}
-	| /* Lambda */;
+	| /* Lambda */
+;
 
 SENTENCIA ::= 
-			ID:i IGUAL NUMERO:n PUNTOYCOMA
-				{:					
-					RESULT = new Asignacion(i,n);
-				:}
-			| ID:i1 IGUAL ID:i2 PUNTOYCOMA
-				{:					
-					RESULT = new Asignacion(i1, i2);
-				:}
-			| INCR ID:i PUNTOYCOMA
-				{:				 	
-				 	RESULT = new Incremento(i);
-				:}
-			| DECR ID:i PUNTOYCOMA
-				{:					
-				 	RESULT = new Decremento(i);
-				:}			
-			
-			| MIENTRAS ID:i DISTINTOCERO HACER PUNTOYCOMA PROGRAMA:p FIN PUNTOYCOMA
-				{:					
-					RESULT = new Mientras(i, p);		
-				:} 	
-			;
+	ID:i IGUAL NUMERO:n PUNTOYCOMA {:					
+		RESULT = new Asignacion(i,n);
+	:}
+	| ID:i1 IGUAL ID:i2 PUNTOYCOMA {:					
+		RESULT = new Asignacion(i1, i2);
+	:}
+	| INCR ID:i PUNTOYCOMA {:				 	
+		RESULT = new Incremento(i);
+	:}
+	| DECR ID:i PUNTOYCOMA {:					
+		RESULT = new Decremento(i);
+	:}			
+	| MIENTRAS ID:i DISTINTOCERO HACER PUNTOYCOMA PROGRAMA:p FIN PUNTOYCOMA {:					
+		RESULT = new Mientras(i, p);		
+	:}
+	| IMPRIMIR IDS PUNTOYCOMA {:
+		RESULT = new Imprimir(VariablesImprimir);
+		VariablesImprimir.clear();
+	:}				
+;
+
+IDS ::=
+	 IDS COMA ID:i {:
+		VariablesImprimir.add(i);
+	:}
+	| ID:i {:
+		VariablesImprimir.add(i);
+	:}
+;
