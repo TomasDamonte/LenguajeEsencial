@@ -1,1 +1,6 @@
 /bin/
+.idea
+LenguajeEsencial.iml
+src/compilador_esencial/Parser.java*
+src/compilador_esencial/Scanner.java*
+/src/compilador_esencial/sym.java

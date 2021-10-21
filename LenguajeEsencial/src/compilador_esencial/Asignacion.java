@@ -2,30 +2,30 @@ package compilador_esencial;
 
 public class Asignacion implements Instruccion {
 	
-	private String Variable;
-	private int Valor;
-	private String VariableAsignacion;
+	private String variable;
+	private int valor;
+	private String variableAsignacion;
 	
 	public Asignacion(String v, int valor) {
-		Variable = v;
-		Valor = valor;
+		variable = v;
+		this.valor = valor;
 	}
 	
 	public Asignacion(String v, String v2) {
-		Variable = v;
-		VariableAsignacion = v2;
+		variable = v;
+		variableAsignacion = v2;
 	}
 	
 	@Override
-	public void Ejecutar() {
-		Variable v = ListaVariables.ObtenerOCrearVariable(Variable);
-		if(VariableAsignacion == null) v.SetValor(Valor);
+	public void ejecutar() {
+		Variable v = ListaVariables.obtenerOCrearVariable(variable);
+		if(variableAsignacion == null) v.setValor(valor);
 		else {
-			Variable v2 = ListaVariables.ObtenerVariable(VariableAsignacion);			
-			if(v2 != null) v.SetValor(v2.GetValor());
-			else v.SetValor(0);
+			Variable v2 = ListaVariables.obtenerVariable(variableAsignacion);
+			if(v2 != null) v.setValor(v2.getValor());
+			else v.setValor(0);
 		}
-		ListaVariables.ActualizarVariable(v);
+		ListaVariables.actualizarVariable(v);
 	}
 
 }

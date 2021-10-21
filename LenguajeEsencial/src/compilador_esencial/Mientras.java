@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 public class Mientras implements Instruccion {
 
-	private String Condicion;
-	private ArrayList<Instruccion> Instrucciones;
+	private String condicion;
+	private ArrayList<Instruccion> instrucciones;
 	
 	public Mientras(String cond, ArrayList<Instruccion> inst) {
-		Condicion = cond;
-		Instrucciones = inst;
+		condicion = cond;
+		instrucciones = inst;
 	}
 	
 	@Override
-	public void Ejecutar() {
-		while(ListaVariables.ObtenerOCrearVariable(Condicion).GetValor() != 0) {
-			for(Instruccion i : Instrucciones) {
-				i.Ejecutar();
+	public void ejecutar() {
+		while(ListaVariables.obtenerOCrearVariable(condicion).getValor() != 0) {
+			for(Instruccion i : instrucciones) {
+				i.ejecutar();
 			}
 		}
 	}
