@@ -2,36 +2,36 @@ package compilador_esencial;
 
 public class Variable {
 	
-	private String Nombre;
-	private int Valor = 0;
+	private String nombre;
+	private int valor = 0;
 	
 	public Variable(String nombre, int valor) {
-		Nombre = nombre;
-		Valor = valor;
+		this.nombre = nombre;
+		this.valor = valor;
 	}
 	
 	public Variable(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 		
-	public void SetValor(int valor) {
-		Valor = valor;
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 	
-	public String GetNombre() {
-		return Nombre;
+	public String getNombre() {
+		return nombre;
 	}
 	
-	public int GetValor() {
-		return Valor;	
+	public int getValor() {
+		return valor;
 	}
 	
-	public void Incrementar() {
-		Valor++;		
+	public void incrementar() {
+		valor++;
 	}
 	
-	public void Decrementar() {
-		if(Valor > 0) Valor--;		
+	public void decrementar() {
+		if(valor > 0) valor--;
 	}
 
 }

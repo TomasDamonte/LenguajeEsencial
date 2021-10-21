@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 action code {:
-	ArrayList<String> VariablesImprimir = new ArrayList<String>();
+	ArrayList<String> variablesImprimir = new ArrayList<String>();
 :}
 
 /* Terminales sin atributo */
@@ -31,10 +31,11 @@ S ::=
 	PROGRAMA:p {: 
 		if(p != null) {
 			for(Instruccion i : p) {
-				i.Ejecutar();	
+				i.ejecutar();
 			}
-		}		
+		}
 		System.out.println("------ Fin de la ejecucion ------"); 
+
 	:}
 ;
 
@@ -64,16 +65,16 @@ SENTENCIA ::=
 		RESULT = new Mientras(i, p);		
 	:}
 	| IMPRIMIR IDS PUNTOYCOMA {:
-		RESULT = new Imprimir(VariablesImprimir);
-		VariablesImprimir.clear();
+		RESULT = new Imprimir(variablesImprimir);
+		variablesImprimir.clear();
 	:}				
 ;
 
 IDS ::=
 	 IDS COMA ID:i {:
-		VariablesImprimir.add(i);
+		variablesImprimir.add(i);
 	:}
 	| ID:i {:
-		VariablesImprimir.add(i);
+		variablesImprimir.add(i);
 	:}
 ;

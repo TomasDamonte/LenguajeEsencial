@@ -2,17 +2,17 @@ package compilador_esencial;
 
 public class Incremento implements Instruccion {
 
-	private String Variable;
+	private String variable;
 	
 	public Incremento(String v) {
-		Variable = v;
+		variable = v;
 	}
 	
 	@Override
-	public void Ejecutar() {
-		Variable v = ListaVariables.ObtenerOCrearVariable(Variable);
-		v.Incrementar();
-		ListaVariables.ActualizarVariable(v);
+	public void ejecutar() {
+		Variable v = ListaVariables.obtenerOCrearVariable(variable);
+		v.incrementar();
+		ListaVariables.actualizarVariable(v);
 	}
 
 }
