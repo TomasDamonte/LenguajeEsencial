@@ -179,7 +179,7 @@ class CUP$Parser$actions {
 				i.Ejecutar();	
 			}
 		}		
-		ListaVariables.ImprimirVariables(); 
+		System.out.println("------ Fin de la ejecucion ------"); 
 	
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

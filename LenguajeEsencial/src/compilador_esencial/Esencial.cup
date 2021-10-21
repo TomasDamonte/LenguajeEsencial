@@ -34,7 +34,7 @@ S ::=
 				i.Ejecutar();	
 			}
 		}		
-		ListaVariables.ImprimirVariables(); 
+		System.out.println("------ Fin de la ejecucion ------"); 
 	:}
 ;
 
