@@ -1,25 +1,25 @@
 package compilador_esencial;
 
-public class Asignacion implements Instruccion {
+public class Asignacion implements Ejecutable {
 	
-	private String variable;
-	private int valor;
+	private String nombreVariable;
+	private int valorVariable;
 	private String variableAsignacion;
 	
-	public Asignacion(String v, int valor) {
-		variable = v;
-		this.valor = valor;
+	public Asignacion(String nombreVariable, int valorVariable) {
+		this.nombreVariable = nombreVariable;
+		this.valorVariable = valorVariable;
 	}
 	
-	public Asignacion(String v, String v2) {
-		variable = v;
-		variableAsignacion = v2;
+	public Asignacion(String nombreVariable, String nombreVariableAsignacion) {
+		this.nombreVariable =  nombreVariable;
+		this.variableAsignacion = nombreVariableAsignacion;
 	}
 	
 	@Override
 	public void ejecutar() {
-		Variable v = ListaVariables.obtenerOCrearVariable(variable);
-		if(variableAsignacion == null) v.setValor(valor);
+		Variable v = ListaVariables.obtenerOCrearVariable(nombreVariable);
+		if(variableAsignacion == null) v.setValor(valorVariable);
 		else {
 			Variable v2 = ListaVariables.obtenerVariable(variableAsignacion);
 			if(v2 != null) v.setValor(v2.getValor());

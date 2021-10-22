@@ -2,11 +2,11 @@ package compilador_esencial;
 
 import java.util.ArrayList;
 
-public class Imprimir implements Instruccion {
+public class Impresion implements Ejecutable {
 
 	private ArrayList<String> variables;
 	
-	public Imprimir(ArrayList<String> vars) {
+	public Impresion(ArrayList<String> vars) {
 		variables = new ArrayList<>(vars);
 	}
 	
@@ -14,9 +14,7 @@ public class Imprimir implements Instruccion {
 	public void ejecutar() {
 		for(String va : variables) {
 			Variable v = ListaVariables.obtenerVariable(va);
-			if(v != null) {
-				System.out.println(v.getNombre() + " = " + v.getValor());
-			}
+			if(v != null) System.out.println(v.getNombre() + " = " + v.getValor());
 		}		
 	}
 

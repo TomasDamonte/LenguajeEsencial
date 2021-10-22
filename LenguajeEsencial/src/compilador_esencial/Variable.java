@@ -3,7 +3,7 @@ package compilador_esencial;
 public class Variable {
 	
 	private String nombre;
-	private int valor = 0;
+	private int valor;
 	
 	public Variable(String nombre, int valor) {
 		this.nombre = nombre;
@@ -11,7 +11,7 @@ public class Variable {
 	}
 	
 	public Variable(String nombre) {
-		this.nombre = nombre;
+		this(nombre, 0);
 	}
 		
 	public void setValor(int valor) {

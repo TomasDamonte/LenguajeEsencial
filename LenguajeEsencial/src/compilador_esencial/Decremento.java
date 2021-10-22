@@ -1,16 +1,16 @@
 package compilador_esencial;
 
-public class Decremento implements Instruccion {
+public class Decremento implements Ejecutable {
 
-	private String variable;
+	private String nombreVariable;
 	
-	public Decremento(String v) {
-		variable = v;
+	public Decremento(String nombreVariable) {
+		this.nombreVariable = nombreVariable;
 	}
 	
 	@Override
 	public void ejecutar() {
-		Variable v = ListaVariables.obtenerOCrearVariable(variable);
+		Variable v = ListaVariables.obtenerOCrearVariable(nombreVariable);
 		v.decrementar();
 		ListaVariables.actualizarVariable(v);
 	}

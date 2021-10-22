@@ -12,23 +12,23 @@ public class ListaVariables {
 		}
 	}
 	
-	public static Variable obtenerVariable(String nombre) {
+	public static Variable obtenerVariable(String nombreVariable) {
 		for(Variable v : variables) {
-			if(v.getNombre().equals(nombre)) return v;
+			if(v.getNombre().equals(nombreVariable)) return v;
 		}
 		return null;
 	}
 	
-	public static Variable crearVariable(String nombre) {
-		Variable var = new Variable(nombre);
+	public static Variable crearVariable(String nombreVariable) {
+		Variable var = new Variable(nombreVariable);
 		ListaVariables.variables.add(var);
 		return var;
 	}
 	
-	public static Variable obtenerOCrearVariable(String nombre) {
-		Variable v = obtenerVariable(nombre);
+	public static Variable obtenerOCrearVariable(String nombreVariable) {
+		Variable v = obtenerVariable(nombreVariable);
 		if(v != null) return v;
-		else return crearVariable(nombre);
+		return crearVariable(nombreVariable);
 	}
 
 

@@ -50,7 +50,7 @@ PROGRAMA ::=
 
 SENTENCIA ::= 
 	ID:i IGUAL NUMERO:n PUNTOYCOMA {:					
-		RESULT = new Asignacion(i,n);
+		RESULT = new Asignacion(i, n);
 	:}
 	| ID:i1 IGUAL ID:i2 PUNTOYCOMA {:					
 		RESULT = new Asignacion(i1, i2);
@@ -65,7 +65,7 @@ SENTENCIA ::=
 		RESULT = new Mientras(i, p);		
 	:}
 	| IMPRIMIR IDS PUNTOYCOMA {:
-		RESULT = new Imprimir(variablesImprimir);
+		RESULT = new Impresion(variablesImprimir);
 		variablesImprimir.clear();
 	:}				
 ;

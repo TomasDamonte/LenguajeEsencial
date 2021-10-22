@@ -2,20 +2,20 @@ package compilador_esencial;
 
 import java.util.ArrayList;
 
-public class Mientras implements Instruccion {
+public class Mientras implements Ejecutable {
 
-	private String condicion;
-	private ArrayList<Instruccion> instrucciones;
+	private String variableCondicion;
+	private ArrayList<Ejecutable> instrucciones;
 	
-	public Mientras(String cond, ArrayList<Instruccion> inst) {
-		condicion = cond;
-		instrucciones = inst;
+	public Mientras(String variableCondicion, ArrayList<Ejecutable> instrucciones) {
+		this.variableCondicion = variableCondicion;
+		this.instrucciones = instrucciones;
 	}
 	
 	@Override
 	public void ejecutar() {
-		while(ListaVariables.obtenerOCrearVariable(condicion).getValor() != 0) {
-			for(Instruccion i : instrucciones) {
+		while(ListaVariables.obtenerOCrearVariable(variableCondicion).getValor() != 0) {
+			for(Ejecutable i : instrucciones) {
 				i.ejecutar();
 			}
 		}
