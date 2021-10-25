@@ -19,8 +19,8 @@ terminal String ID;
 non terminal S, IDS;
 
 /* No terminales con atributo asociado */
-non terminal ArrayList<Instruccion> PROGRAMA;
-non terminal Instruccion SENTENCIA;
+non terminal ArrayList<Ejecutable> PROGRAMA;
+non terminal Ejecutable SENTENCIA;
 
 /* Axioma */
 start with S;
@@ -30,7 +30,7 @@ start with S;
 S ::= 
 	PROGRAMA:p {: 
 		if(p != null) {
-			for(Instruccion i : p) {
+			for(Ejecutable i : p) {
 				i.ejecutar();
 			}
 		}
@@ -42,7 +42,7 @@ S ::=
 PROGRAMA ::= 
 	PROGRAMA:p SENTENCIA:s {:
 		if(p != null) RESULT = p;
-		else RESULT = new ArrayList<Instruccion>();
+		else RESULT = new ArrayList<Ejecutable>();
 		RESULT.add(s);
 	:}
 	| /* Lambda */
