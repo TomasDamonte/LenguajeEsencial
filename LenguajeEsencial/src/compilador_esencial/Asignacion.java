@@ -4,7 +4,7 @@ public class Asignacion implements Ejecutable {
 	
 	private String nombreVariable;
 	private int valorVariable;
-	private String variableAsignacion;
+	private String nombreVariableAsignacion;
 	
 	public Asignacion(String nombreVariable, int valorVariable) {
 		this.nombreVariable = nombreVariable;
@@ -13,15 +13,15 @@ public class Asignacion implements Ejecutable {
 	
 	public Asignacion(String nombreVariable, String nombreVariableAsignacion) {
 		this.nombreVariable =  nombreVariable;
-		this.variableAsignacion = nombreVariableAsignacion;
+		this.nombreVariableAsignacion = nombreVariableAsignacion;
 	}
 	
 	@Override
 	public void ejecutar() {
 		Variable v = ListaVariables.obtenerOCrearVariable(nombreVariable);
-		if(variableAsignacion == null) v.setValor(valorVariable);
+		if(nombreVariableAsignacion == null) v.setValor(valorVariable);
 		else {
-			Variable v2 = ListaVariables.obtenerVariable(variableAsignacion);
+			Variable v2 = ListaVariables.obtenerVariable(nombreVariableAsignacion);
 			if(v2 != null) v.setValor(v2.getValor());
 			else v.setValor(0);
 		}

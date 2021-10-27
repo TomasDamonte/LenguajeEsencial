@@ -34,8 +34,7 @@ S ::=
 				i.ejecutar();
 			}
 		}
-		System.out.println("------ Fin de la ejecucion ------"); 
-
+		System.out.println("------ Fin de la ejecucion ------");
 	:}
 ;
 
